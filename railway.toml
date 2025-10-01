@@ -3,6 +3,6 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "sh -c 'npx medusa db:migrate && npm run start'"
+startCommand = "sh -c 'MEDUSA_DISABLE_ADMIN=true npx medusa db:migrate && MEDUSA_DISABLE_ADMIN=true npm run start'"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3

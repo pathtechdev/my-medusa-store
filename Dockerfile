@@ -20,11 +20,8 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build Medusa (includes admin UI)
+# Build Medusa backend only
 RUN npm run build
-
-# Build admin UI separately to ensure it exists
-RUN npx medusa build --admin-only
 
 # Production stage
 # Runner stage
