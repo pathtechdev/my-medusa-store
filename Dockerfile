@@ -24,7 +24,7 @@ COPY . .
 RUN npm run build
 
 # Build admin UI separately to ensure it exists
-RUN npx medusa build --admin
+RUN npx medusa build --admin-only
 
 # Production stage
 # Runner stage
