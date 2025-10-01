@@ -1,4 +1,4 @@
-# Backend Dockerfile for Medusa
+# Backend Dockerfile for Medusa v2
 FROM node:20-alpine AS base
 
 # Install dependencies only when needed
@@ -36,7 +36,7 @@ RUN adduser --system --uid 1001 medusa
 # Copy necessary files
 COPY --from=builder --chown=medusa:nodejs /app/package*.json ./
 COPY --from=builder --chown=medusa:nodejs /app/node_modules ./node_modules
-COPY --from=builder --chown=medusa:nodejs /app/dist ./dist
+COPY --from=builder --chown=medusa:nodejs /app/.medusa ./.medusa
 COPY --from=builder --chown=medusa:nodejs /app/medusa-config.ts ./
 COPY --from=builder --chown=medusa:nodejs /app/instrumentation.ts ./
 COPY --from=builder --chown=medusa:nodejs /app/src ./src
@@ -45,4 +45,4 @@ USER medusa
 
 EXPOSE 9000
 
-CMD ["npm", "run", "start"] 
+CMD ["npm", "run", "start"]
