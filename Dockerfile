@@ -24,26 +24,26 @@ COPY . .
 RUN npm run build
 
 # Production stage
+# Runner stage
 FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
 ENV PORT=9000
 
-# Create a non-root user
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 medusa
 
-# Copy necessary files
 COPY --from=builder --chown=medusa:nodejs /app/package*.json ./
 COPY --from=builder --chown=medusa:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=medusa:nodejs /app/.medusa ./.medusa
 COPY --from=builder --chown=medusa:nodejs /app/medusa-config.ts ./
 COPY --from=builder --chown=medusa:nodejs /app/instrumentation.ts ./
 COPY --from=builder --chown=medusa:nodejs /app/src ./src
+COPY --from=builder --chown=medusa:nodejs /app/start.sh ./start.sh
 
 USER medusa
 
 EXPOSE 9000
 
-CMD ["npm", "run", "start"]
+CMD ["./start.sh"]
