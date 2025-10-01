@@ -45,4 +45,4 @@ USER medusa
 
 EXPOSE 9000
 
-CMD ["node", ".medusa/index.js"]
+CMD ["npm", "run", "start"]
