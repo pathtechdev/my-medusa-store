@@ -40,10 +40,9 @@ COPY --from=builder --chown=medusa:nodejs /app/.medusa ./.medusa
 COPY --from=builder --chown=medusa:nodejs /app/medusa-config.ts ./
 COPY --from=builder --chown=medusa:nodejs /app/instrumentation.ts ./
 COPY --from=builder --chown=medusa:nodejs /app/src ./src
-COPY --from=builder --chown=medusa:nodejs /app/start.sh ./start.sh
 
 USER medusa
 
 EXPOSE 9000
 
-CMD ["./start.sh"]
+CMD ["node", ".medusa/index.js"]
