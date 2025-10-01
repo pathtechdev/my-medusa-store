@@ -1,0 +1,26 @@
+services:
+  # Medusa Backend Web Service
+  - type: web
+    name: flower-shop-backend
+    runtime: node
+    region: singapore
+    plan: free
+    branch: master
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        value: postgresql://medusa:4pUuGooEsJtJ6joEQArKwEPQXEVpqfx1@dpg-d3ecdp2li9vc739i5av0-a.singapore-postgres.render.com/medusa_store_ia4y
+      - key: JWT_SECRET
+        value: 2320a9b58c5e2f202b8cc4b9c6ba5b4fd15584cc4e253e1783c4023eb8c255bb
+      - key: COOKIE_SECRET
+        value: 358565aa6e01f364af477494a89324415d3bdc857130145a6c88350b098785cd
+      - key: STORE_CORS
+        value: http://localhost:8000
+      - key: ADMIN_CORS
+        value: http://localhost:9000
+      - key: AUTH_CORS
+        value: http://localhost:9000
+    healthCheckPath: /health 
