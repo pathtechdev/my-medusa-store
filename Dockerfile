@@ -40,6 +40,7 @@ COPY --from=builder --chown=medusa:nodejs /app/.medusa ./.medusa
 COPY --from=builder --chown=medusa:nodejs /app/medusa-config.ts ./
 COPY --from=builder --chown=medusa:nodejs /app/instrumentation.ts ./
 COPY --from=builder --chown=medusa:nodejs /app/src ./src
+COPY --from=builder --chown=medusa:nodejs /app/tsconfig.json ./tsconfig.json
 
 USER medusa
 
