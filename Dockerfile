@@ -23,8 +23,9 @@ COPY . .
 # Build Medusa backend only
 RUN npm run build
 
-# Fix admin build directory - copy client to admin folder
+# Fix admin build directory - copy client to admin folder and root
 RUN cp -r .medusa/client .medusa/admin
+RUN cp .medusa/client/index.html .medusa/index.html
 
 # Production stage
 # Runner stage
