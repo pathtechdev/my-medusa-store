@@ -38,13 +38,25 @@ ENV PORT=9000
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 medusa
 
+# Copy package files and node_modules
 COPY --from=builder --chown=medusa:nodejs /app/package*.json ./
 COPY --from=builder --chown=medusa:nodejs /app/node_modules ./node_modules
+
+# Copy build output
 COPY --from=builder --chown=medusa:nodejs /app/.medusa ./.medusa
+
+# Copy source files needed for runtime
 COPY --from=builder --chown=medusa:nodejs /app/medusa-config.ts ./
 COPY --from=builder --chown=medusa:nodejs /app/instrumentation.ts ./
-COPY --from=builder --chown=medusa:nodejs /app/src ./src
 COPY --from=builder --chown=medusa:nodejs /app/tsconfig.json ./tsconfig.json
+COPY --from=builder --chown=medusa:nodejs /app/src ./src
+
+# CRITICAL FIX: Copy admin files to the path Medusa actually looks for
+RUN mkdir -p public/admin
+RUN cp .medusa/server/public/admin/index.html public/admin/ || echo "Admin index.html not found, continuing..."
+
+# Copy all admin static assets too
+RUN cp -r .medusa/server/public/admin/* public/admin/ 2>/dev/null || echo "No additional admin assets found"
 
 USER medusa
 
