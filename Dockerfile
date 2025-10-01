@@ -46,4 +46,4 @@ USER medusa
 
 EXPOSE 9000
 
-CMD ["sh", "-c", "npx medusa migrations run && npm run start"]
+CMD ["sh", "-c", "npx medusa db:migrate && npm run start"]
