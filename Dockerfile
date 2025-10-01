@@ -28,6 +28,7 @@ FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
+ENV PORT=9000
 
 # Create a non-root user
 RUN addgroup --system --gid 1001 nodejs
@@ -46,4 +47,3 @@ USER medusa
 EXPOSE 9000
 
 CMD ["npm", "run", "start"]
-# Force Dockerfile
