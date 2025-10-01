@@ -8,10 +8,8 @@ npm-debug.log
 dist
 .medusa
 .DS_Store
-*.md
-!README.md
 .vscode
 .idea
 coverage
 *.log
-.next 
+.next
