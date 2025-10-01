@@ -10,7 +10,11 @@ module.exports = defineConfig({
       adminCors: process.env.ADMIN_CORS!,
       authCors: process.env.AUTH_CORS!,
       jwtSecret: process.env.JWT_SECRET || "supersecret",
-      cookieSecret: process.env.COOKIE_SECRET || "supersecret",
+      cookieSecret: process.env.COOKIE_SECRET || "supersecret"
+    },
+    // Disable admin in production to avoid build requirement
+    admin: {
+      disable: process.env.NODE_ENV === "production"
     }
   },
   modules: [
