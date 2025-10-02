@@ -17,6 +17,7 @@
     "seed": "medusa exec ./src/scripts/seed-flower-shop-simple.ts",
     "seed:flower": "medusa exec ./src/scripts/seed-flower-shop-simple.ts",
     "seed:customers": "medusa exec ./src/scripts/seed-customers.ts",
+    "create-admin": "bash create-admin.sh",
     "start": "medusa start",
     "dev": "medusa develop",
     "test:integration:http": "TEST_TYPE=integration:http NODE_OPTIONS=--experimental-vm-modules jest --silent=false --runInBand --forceExit",
